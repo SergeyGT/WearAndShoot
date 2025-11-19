@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-WSApplication<w_s>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.w_s_backend.w_s.WSApplication",
+            "projectName": "w_s",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
