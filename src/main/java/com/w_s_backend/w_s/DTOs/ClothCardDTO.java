@@ -14,4 +14,5 @@ public class ClothCardDTO {
     private Integer warmthLevel;
     private String color;
     private MultipartFile image;
+    private Long userId;
 }

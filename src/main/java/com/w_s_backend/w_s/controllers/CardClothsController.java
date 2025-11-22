@@ -3,6 +3,7 @@ package com.w_s_backend.w_s.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -30,7 +31,7 @@ public class CardClothsController {
     private final ClothCardService clothCardService;
 
     
-    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ClothCardResponseDTO> postMethodName(
             @RequestPart("clothData") ClothCardDTO clothCardDTO,
             @RequestPart("image") MultipartFile image) 
@@ -45,9 +46,9 @@ public class CardClothsController {
     }
     
 
-    @GetMapping
-    public List<ClothCard> read() {
-        return clothCardService.readAllCards();
+    @GetMapping("/userCards")
+    public List<ClothCard> read(@RequestPart("userID") Long id) {
+        return clothCardService.readAllCards(id);
     }
     
 }

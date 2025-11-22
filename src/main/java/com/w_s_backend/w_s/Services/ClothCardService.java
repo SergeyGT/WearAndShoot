@@ -1,5 +1,6 @@
 package com.w_s_backend.w_s.Services;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.w_s_backend.w_s.DTOs.ClothCardDTO;
 import com.w_s_backend.w_s.Repositories.ClothCardPepository;
 import com.w_s_backend.w_s.models.ClothCard;
+import com.w_s_backend.w_s.models.User;
 
 import lombok.AllArgsConstructor;
 
@@ -20,17 +22,19 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ClothCardService {
     private final ClothCardPepository _clothCardPepository;
+    private final UserService _userService;
 
-
-    @Value("${file.upload-dir}")
-    private final String UPLOAD_DIR;
+    // @Value("${file.upload-dir}")
+    // private String UPLOAD_DIR;
+    private final String UPLOAD_DIR = "uploads/images/";
 
     public ClothCard createCard(ClothCardDTO  clothCardDTO){
         if(clothCardDTO.getClothName().isEmpty()) {
             //throw new ApiRequestException("Empty or Null Request data!");
         }
 
-        String imagePath = SaveImage(clothCardDTO.getImage());
+        User user = _userService.findById(clothCardDTO.getUserId());
+        String imagePath = SaveImage(clothCardDTO.getImage(), user.getId());
 
         ClothCard createdCard = ClothCard.builder()
             .clothName(clothCardDTO.getClothName())
@@ -39,6 +43,7 @@ public class ClothCardService {
             .color(clothCardDTO.getColor())
             .season(clothCardDTO.getSeason())
             .warmthLevel(clothCardDTO.getWarmthLevel())
+            .user(user)
             .build();
 
         ClothCard clothCard = _clothCardPepository.save(createdCard);
@@ -46,23 +51,24 @@ public class ClothCardService {
         return clothCard;
     }
 
-    public List<ClothCard> readAllCards(){
-        return _clothCardPepository.findAll();
+    public List<ClothCard> readAllCards(Long id){
+        return _clothCardPepository.findByUserId(id);
     }
 
 
-    private String SaveImage(MultipartFile image){
-        if(image == null || image.isEmpty()){
+     private String SaveImage(MultipartFile image, Long userId){
+        if (image == null || image.isEmpty()) {
             return "";
         }
-
-        try{
-            Path pathUpload = Paths.get(UPLOAD_DIR);
-
-            if (!Files.exists(pathUpload)) {
-                Files.createDirectories(pathUpload);
+        
+        try {
+            String userUploadDir = UPLOAD_DIR + "user_" + userId + "/";
+            Path uploadPath = Paths.get(userUploadDir);
+            
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
             }
-
+            
             String originalFileName = image.getOriginalFilename();
             String fileExtension = "";
             if (originalFileName != null && originalFileName.contains(".")) {
@@ -70,12 +76,13 @@ public class ClothCardService {
             }
             String fileName = UUID.randomUUID().toString() + fileExtension;
             
-            Path filePath = pathUpload.resolve(fileName);
+            Path filePath = uploadPath.resolve(fileName);
             Files.copy(image.getInputStream(), filePath);
             
-            return UPLOAD_DIR + fileName;
-        } catch(Exception ex){
-                return "";
+            return userUploadDir + fileName;
+            
+        } catch (IOException e) {
+            return "";
         }
     }
 }
