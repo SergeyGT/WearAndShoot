@@ -28,13 +28,13 @@ public class ClothCardService {
     // private String UPLOAD_DIR;
     private final String UPLOAD_DIR = "uploads/images/";
 
-    public ClothCard createCard(ClothCardDTO  clothCardDTO){
+    public ClothCard createCard(ClothCardDTO  clothCardDTO, MultipartFile image){
         if(clothCardDTO.getClothName().isEmpty()) {
             //throw new ApiRequestException("Empty or Null Request data!");
         }
 
         User user = _userService.findById(clothCardDTO.getUserId());
-        String imagePath = SaveImage(clothCardDTO.getImage(), user.getId());
+        String imagePath = SaveImage(image, user.getId());
 
         ClothCard createdCard = ClothCard.builder()
             .clothName(clothCardDTO.getClothName())

@@ -18,6 +18,7 @@ import com.w_s_backend.w_s.models.ClothCard;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -31,14 +32,13 @@ public class CardClothsController {
     private final ClothCardService clothCardService;
 
     
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping
     public ResponseEntity<ClothCardResponseDTO> postMethodName(
             @RequestPart("clothData") ClothCardDTO clothCardDTO,
             @RequestPart("image") MultipartFile image) 
     {
-        clothCardDTO.setImage(image);
 
-        ClothCard createCard = clothCardService.createCard(clothCardDTO);
+        ClothCard createCard = clothCardService.createCard(clothCardDTO, image);
         
         ClothCardResponseDTO clothCardResponseDTO = new ClothCardResponseDTO(
             createCard.getId());
@@ -46,8 +46,8 @@ public class CardClothsController {
     }
     
 
-    @GetMapping("/userCards")
-    public List<ClothCard> read(@RequestPart("userID") Long id) {
+    @GetMapping("/userCards/{id}")
+    public List<ClothCard> read(@PathVariable("id") Long id) {
         return clothCardService.readAllCards(id);
     }
     
