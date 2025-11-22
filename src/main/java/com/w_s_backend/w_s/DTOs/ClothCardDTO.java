@@ -1,9 +1,17 @@
 package com.w_s_backend.w_s.DTOs;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.w_s_backend.w_s.models.ClothingCategory;
+import com.w_s_backend.w_s.models.Season;
 import lombok.Data;
 
 @Data
 public class ClothCardDTO {
-
-
+    private String clothName;
+    private ClothingCategory category; 
+    private Season season;
+    private Integer warmthLevel;
+    private String color;
+    private MultipartFile image;
 }
