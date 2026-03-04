@@ -45,13 +45,9 @@ public class SecurityConfig {
             .requestMatchers("/cloth").hasRole("USER")
             .anyRequest().permitAll()
         )
-        .formLogin(form->form
-            .loginPage("/login")
-            .loginProcessingUrl("/login")          
-            .defaultSuccessUrl("/cloth", true)      
-            .failureUrl("/login?error=true")        
-            .permitAll()
-        )
+        .formLogin(form -> form.disable())
+
+        .csrf(csrf -> csrf.disable())
         ;
 
         return http.build();
