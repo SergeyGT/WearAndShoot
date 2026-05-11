@@ -636,6 +636,7 @@ public void deleteOutfit(Long outfitId, Long userId) {
                 case SUMMER -> temp > 15;
                 case SPRING, AUTUMN -> temp >= 0 && temp <= 20;
                 case WINTER -> temp < 10;
+                case ALL_SEASON -> true;
                 default -> true;
             };
             return tempMatch && seasonMatch;
