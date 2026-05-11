@@ -101,7 +101,9 @@ public ResponseEntity<?> generateOutfits(
             request.getStyle(),
             request.getCount(),
             request.getOutfitName(),
-            colorScheme  // ДОБАВЛЕНО
+            colorScheme,
+            request.getLat(),
+            request.getLon()
         );
         
         List<OutfitResponse> responses = outfits.stream()

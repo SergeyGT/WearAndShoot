@@ -149,7 +149,9 @@ public class ClothCardService {
     }
 
     @Transactional
-    public List<Outfit> generateAndSaveOutfits(Long userId, OutfitStyle style, int count, String customName, ColorScheme colorScheme) {
+    public List<Outfit> generateAndSaveOutfits(Long userId, OutfitStyle style, int count, String customName, ColorScheme colorScheme,
+        Double lat, Double lon
+    ) {
     User user = _userService.findById(userId);
     List<ClothCard> allCards = _clothCardPepository.findByUserId(userId);
 
@@ -186,7 +188,10 @@ public class ClothCardService {
     // Получаем погоду
     CurrentWeatherDto weather = null;
     try {
-        weather = weatherService.getCurrentWeather("Moscow");
+        if (lat != null && lon != null) {
+        String query = lat + "," + lon;
+        weather = weatherService.getCurrentWeather(query);
+    }
     } catch (Exception e) {
         log.warn("Не удалось получить погоду, используем значения по умолчанию", e);
     }
@@ -323,18 +328,67 @@ public void deleteOutfit(Long outfitId, Long userId) {
     
     // Проверка обязательных категорий
     if (topBaseCards.isEmpty()) {
-        throw new IllegalStateException(
-            "Нет вещей стиля '" + getStyleDisplayName(style) + 
-            "' в категории 'Верх'. Добавьте подходящие вещи или выберите другой стиль."
-        );
-    }
-    if (bottomCards.isEmpty()) {
-        throw new IllegalStateException(
-            "Нет вещей стиля '" + getStyleDisplayName(style) + 
-            "' в категории 'Низ'. Добавьте подходящие вещи или выберите другой стиль."
-        );
+    // Проверяем, есть ли вообще вещи этой категории
+        List<ClothCard> allTopBase = cardsByCategory.getOrDefault(ClothingCategory.TOP_BASE, Collections.emptyList());
+        
+        if (allTopBase.isEmpty()) {
+            throw new IllegalStateException(
+                "У вас нет вещей в категории 'Верх'. Добавьте футболку или рубашку."
+            );
+        }
+        
+        // Проверяем, подходят ли они по стилю
+        boolean anyMatchStyle = allTopBase.stream().anyMatch(c -> matchesStyle(c, style));
+        boolean anyMatchWeather = allTopBase.stream().anyMatch(c -> matchesWeather(c, temp));
+        
+        if (!anyMatchStyle && !anyMatchWeather) {
+            throw new IllegalStateException(
+                "Вещи категории 'Верх' не подходят по стилю '" + getStyleDisplayName(style) + 
+                "' и не соответствуют текущей погоде (~" + (int)temp + "°C). "
+            );
+        } else if (!anyMatchStyle) {
+            throw new IllegalStateException(
+                "Вещи категории 'Верх' не подходят для стиля '" + getStyleDisplayName(style) + 
+                "'. Выберите другой стиль."
+            );
+        } else {
+            throw new IllegalStateException(
+                "Вещи категории 'Верх' не подходят для текущей погоды (~" + (int)temp + "°C). " +
+                "Добавьте вещи, подходящие по сезону или теплоте."
+            );
+        }
     }
 
+    // Аналогично для BOTTOM:
+    if (bottomCards.isEmpty()) {
+        List<ClothCard> allBottom = cardsByCategory.getOrDefault(ClothingCategory.BOTTOM, Collections.emptyList());
+        
+        if (allBottom.isEmpty()) {
+            throw new IllegalStateException(
+                "У вас нет вещей в категории 'Низ'. Добавьте брюки или юбку."
+            );
+        }
+        
+        boolean anyMatchStyle = allBottom.stream().anyMatch(c -> matchesStyle(c, style));
+        boolean anyMatchWeather = allBottom.stream().anyMatch(c -> matchesWeather(c, temp));
+        
+        if (!anyMatchStyle && !anyMatchWeather) {
+            throw new IllegalStateException(
+                "Вещи категории 'Низ' не подходят по стилю '" + getStyleDisplayName(style) + 
+                "' и не соответствуют текущей погоде (~" + (int)temp + "°C)."
+            );
+        } else if (!anyMatchStyle) {
+            throw new IllegalStateException(
+                "Вещи категории 'Низ' не подходят для стиля '" + getStyleDisplayName(style) + 
+                "'. Выберите другой стиль."
+            );
+        } else {
+            throw new IllegalStateException(
+                "Вещи категории 'Низ' не подходят для текущей погоды (~" + (int)temp + "°C). " +
+                "Добавьте вещи, подходящие по сезону или теплоте."
+            );
+        }
+    }
     // Опциональные категории
     List<ClothCard> shoesCards = filterCards(cardsByCategory, ClothingCategory.SHOES, style, temp);
     List<ClothCard> midCards = temp <= 15 ? filterCards(cardsByCategory, ClothingCategory.TOP_MID, style, temp) : Collections.emptyList();
@@ -607,13 +661,26 @@ public void deleteOutfit(Long outfitId, Long userId) {
     OutfitStyle style,
     double temp
     ) {
-        List<ClothCard> cards = cardsByCategory.getOrDefault(category, Collections.emptyList());
-        if (cards.isEmpty()) return cards;
-        
-        return cards.stream()
-            .filter(c -> matchesStyle(c, style))
-            .filter(c -> matchesWeather(c, temp))
-            .collect(Collectors.toList());
+       List<ClothCard> cards = cardsByCategory.getOrDefault(category, Collections.emptyList());
+    if (cards.isEmpty()) return cards;
+    
+    // ЛОГИРУЕМ
+    log.info("=== Фильтрация категории {} ===", category);
+    log.info("Всего вещей: {}", cards.size());
+    for (ClothCard c : cards) {
+        log.info("  Вещь: {} | стиль={} | сезон={} | теплота={} | matchStyle={} | matchWeather={}", 
+            c.getClothName(), c.getStyle(), c.getSeason(), c.getWarmthLevel(),
+            matchesStyle(c, style), matchesWeather(c, temp));
+    }
+    
+    List<ClothCard> filtered = cards.stream()
+        .filter(c -> matchesStyle(c, style))
+        .filter(c -> matchesWeather(c, temp))
+        .collect(Collectors.toList());
+    
+    log.info("После фильтрации: {}", filtered.size());
+    
+    return filtered;
     }
 
     // Генерация уникального ключа для комбинации

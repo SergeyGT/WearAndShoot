@@ -12,4 +12,6 @@ public class OutfitGenerateRequest {
     private int count = 3;
     private String outfitName;
     private ColorScheme colorScheme = ColorScheme.ANY;
+    private Double lat;   
+    private Double lon;
 }
