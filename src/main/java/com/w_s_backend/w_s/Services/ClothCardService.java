@@ -52,6 +52,9 @@ public class ClothCardService {
         if(clothCardDTO.getClothName().isEmpty()) {
             //throw new ApiRequestException("Empty or Null Request data!");
         }
+        if(clothCardDTO.getColor() == null || clothCardDTO.getColor().trim().isEmpty()) {
+            throw new RuntimeException("Цвет обязателен!");
+        }
 
         User user = _userService.findById(clothCardDTO.getUserId());
         String imagePath = SaveImage(image, user.getId());
