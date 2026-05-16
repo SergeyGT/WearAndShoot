@@ -1,4 +1,5 @@
-package com.w_s_backend.w_s.security; 
+package com.w_s_backend.w_s.security;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -26,6 +27,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getRequestURI();
+
+        // Пропускаем публичные эндпоинты без проверки токена
+        if (path.startsWith("/auth/") || path.equals("/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String token = getTokenFromCookie(request);
 
