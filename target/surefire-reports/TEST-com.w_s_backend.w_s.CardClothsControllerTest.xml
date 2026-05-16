@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.w_s_backend.w_s.ClothCardServiceTest" time="0.143" tests="15" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.w_s_backend.w_s.CardClothsControllerTest" time="0.128" tests="17" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,195 +59,42 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="autumnOutfits_ShouldIncludeMidLayer" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.108">
-    <system-out><![CDATA[16:29:08.729 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_BASE ===
-16:29:08.729 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.729 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Рубашка | стиль=CASUAL | сезон=ALL_SEASON | теплота=3 | matchStyle=true | matchWeather=true
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории BOTTOM ===
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Джинсы | стиль=CASUAL | сезон=ALL_SEASON | теплота=3 | matchStyle=true | matchWeather=true
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории SHOES ===
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Кроссовки | стиль=CASUAL | сезон=ALL_SEASON | теплота=2 | matchStyle=true | matchWeather=false
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 0
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_MID ===
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Свитер | стиль=CASUAL | сезон=ALL_SEASON | теплота=4 | matchStyle=true | matchWeather=true
-16:29:08.731 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.732 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сгенерировано 2 уникальных комбинаций
-16:29:08.734 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Осенний тест #1': 2 предметов
-16:29:08.734 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Осенний тест #2': 3 предметов
-
-✅ Осенние образы (9°C):
-🔹 Осенний тест #1 (2 вещей):
-   - Рубашка [TOP_BASE]
-   - Джинсы [BOTTOM]
-🔹 Осенний тест #2 (3 вещей):
-   - Рубашка [TOP_BASE]
-   - Джинсы [BOTTOM]
-   - Свитер [TOP_MID]
+  <testcase name="getUserCards_ShouldReturnList" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.084"/>
+  <testcase name="getUserOutfits_ShouldReturnList" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.005"/>
+  <testcase name="getLikedOutfits_ShouldReturnList" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="generateOutfits_ShouldReturnOk_WhenAuthorized" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.01">
+    <system-out><![CDATA[16:29:08.597 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- === ЗАПРОС НА ГЕНЕРАЦИЮ ===
+16:29:08.598 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Сессия: null
+16:29:08.600 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Куки: [jakarta.servlet.http.Cookie@e8b20c6f]
+16:29:08.600 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Запрос на генерацию образов для userId: 1
 ]]></system-out>
   </testcase>
-  <testcase name="colorMatching_Monochrome_ShouldAllowSameGroupAndCloseShades" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.002"/>
-  <testcase name="summerOutfits_ShouldGenerateOnlyBaseLayers" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.003">
-    <system-out><![CDATA[16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_BASE ===
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Футболка | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории BOTTOM ===
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Шорты | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.740 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории SHOES ===
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Кроссовки | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сгенерировано 2 уникальных комбинаций
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #1': 3 предметов
-16:29:08.741 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #2': 2 предметов
+  <testcase name="deleteCard_ShouldReturnUnauthorized_WhenNoJwt" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="generateOutfits_ShouldReturnBadRequest_WhenIllegalState" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.004">
+    <system-out><![CDATA[16:29:08.606 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- === ЗАПРОС НА ГЕНЕРАЦИЮ ===
+16:29:08.606 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Сессия: null
+16:29:08.606 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Куки: [jakarta.servlet.http.Cookie@e8b20c6f]
+16:29:08.606 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Запрос на генерацию образов для userId: 1
+16:29:08.607 [main] WARN com.w_s_backend.w_s.controllers.CardClothsController -- Ошибка генерации: Недостаточно вещей
 ]]></system-out>
   </testcase>
-  <testcase name="colorMatching_Analogous_ShouldAllowNeighborColorsOnColorWheel" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.001"/>
-  <testcase name="colorMatching_Neutral_ShouldOnlyAllowNeutrals" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.001"/>
-  <testcase name="colorMatching_Complementary_ShouldAllowOppositeColors" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.001"/>
-  <testcase name="matchesStyle_ShouldCorrectlyFilterByOutfitStyle" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.002"/>
-  <testcase name="deleteCard_ShouldRemoveCardAndCleanRelations" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.003">
-    <system-out><![CDATA[16:29:08.748 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Удалена вещь ID: 10 пользователя ID: 1
+  <testcase name="deleteOutfit_ShouldReturnUnauthorized_WhenNoJwt" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="createCard_ShouldReturnOkWithCardId" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.002"/>
+  <testcase name="getLikedOutfits_ShouldReturnEmptyList" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="deleteCard_ShouldReturnOk_WhenAuthorized" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.003"/>
+  <testcase name="editCard_ShouldReturnOk" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="toggleLikeOutfit_ShouldReturnBadRequest_WhenNoUserId" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="deleteCard_ShouldReturnBadRequest_WhenRuntimeException" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001">
+    <system-out><![CDATA[16:29:08.620 [main] WARN com.w_s_backend.w_s.controllers.CardClothsController -- Ошибка удаления вещи: Вещь не найдена
 ]]></system-out>
   </testcase>
-  <testcase name="winterOutfits_ShouldHaveMoreThanTwoItems" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.004">
-    <system-out><![CDATA[16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_BASE ===
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Рубашка | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории BOTTOM ===
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Брюки | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории SHOES ===
-16:29:08.751 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Ботинки | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_MID ===
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Свитер | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_OUTER ===
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Пуховик | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории HEAD ===
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Шапка | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сгенерировано 12 уникальных комбинаций
-16:29:08.752 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #1': 5 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #2': 4 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #3': 2 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #4': 4 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #5': 4 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #6': 3 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #7': 3 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #8': 5 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #9': 6 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #10': 5 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #11': 4 предметов
-16:29:08.753 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Зимний тест #12': 3 предметов
-
-✅ Зимний образ (-15°C):
-🔹 Зимний тест #1 (5 вещей):
-   - Рубашка [TOP_BASE, теплота: 5, сезон: WINTER]
-   - Брюки [BOTTOM, теплота: 5, сезон: WINTER]
-   - Свитер [TOP_MID, теплота: 5, сезон: WINTER]
-   - Пуховик [TOP_OUTER, теплота: 5, сезон: WINTER]
-   - Ботинки [SHOES, теплота: 5, сезон: WINTER]
+  <testcase name="toggleLikeOutfit_ShouldReturnOk" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
+  <testcase name="generateOutfits_ShouldReturnUnauthorized_WhenNoJwt" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001">
+    <system-out><![CDATA[16:29:08.623 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- === ЗАПРОС НА ГЕНЕРАЦИЮ ===
+16:29:08.623 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Сессия: null
+16:29:08.623 [main] INFO com.w_s_backend.w_s.controllers.CardClothsController -- Куки: null
 ]]></system-out>
   </testcase>
-  <testcase name="winterOutfits_ShouldNotBeOnlyTopAndBottom" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.006">
-    <system-out><![CDATA[16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_BASE ===
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Рубашка | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории BOTTOM ===
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.757 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Брюки | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории SHOES ===
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Ботинки | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_MID ===
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Свитер | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_OUTER ===
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Пуховик | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории HEAD ===
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Шапка | стиль=CASUAL | сезон=WINTER | теплота=5 | matchStyle=true | matchWeather=true
-16:29:08.758 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сгенерировано 12 уникальных комбинаций
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #1': 5 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #2': 4 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #3': 5 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #4': 6 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #5': 3 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #6': 3 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #7': 4 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #8': 4 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #9': 3 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #10': 4 предметов
-16:29:08.759 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #11': 2 предметов
-16:29:08.760 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #12': 5 предметов
-
-✅ Проверка, что нет образов только из верха и низа (-10°C):
-📊 Всего сгенерировано образов: 12
-📊 Образов только верх+низ: 1
-📊 Образов со слоями: 11
-
-⚠️ Образы только верх+низ (допустимо, если есть и другие):
-   - Повседневный образ #11: Рубашка(TOP_BASE), Брюки(BOTTOM)
-
-✅ Образы со слоями:
-   🔹 Повседневный образ #1 (5 вещей): [SHOES, TOP_BASE, TOP_MID, BOTTOM, TOP_OUTER]
-   🔹 Повседневный образ #2 (4 вещей): [SHOES, TOP_BASE, BOTTOM, TOP_OUTER]
-   🔹 Повседневный образ #3 (5 вещей): [SHOES, TOP_BASE, HEAD, TOP_MID, BOTTOM]
-]]></system-out>
-  </testcase>
-  <testcase name="generateOutfits_WhenNoMandatoryCategories_ShouldThrowException" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.002"/>
-  <testcase name="generateOutfits_WithMonochromeScheme_ShouldRespectColorRules" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.003">
-    <system-out><![CDATA[16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории TOP_BASE ===
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Красная футболка | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории BOTTOM ===
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 2
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Синие шорты | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Красные брюки | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 2
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- === Фильтрация категории SHOES ===
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Всего вещей: 1
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService --   Вещь: Красные кроссовки | стиль=CASUAL | сезон=SUMMER | теплота=1 | matchStyle=true | matchWeather=true
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- После фильтрации: 1
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сгенерировано 2 уникальных комбинаций
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #1': 2 предметов
-16:29:08.765 [main] INFO com.w_s_backend.w_s.Services.ClothCardService -- Сохранен образ 'Повседневный образ #2': 3 предметов
-
-✅ Монохромные образы (только красные):
-🔹 Повседневный образ #1:
-   - Красная футболка [Красный]
-   - Красные брюки [Красный]
-🔹 Повседневный образ #2:
-   - Красная футболка [Красный]
-   - Красные брюки [Красный]
-   - Красные кроссовки [Красный]
-]]></system-out>
-  </testcase>
-  <testcase name="colorMatching_NullAndUnknownColors_ShouldReturnTrue" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.001"/>
-  <testcase name="generateOutfits_WhenNoMatchingClothesByStyle_ShouldThrowDescriptiveException" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.001"/>
-  <testcase name="colorMatching_Monochrome_ShouldOnlyAllowSameGroup" classname="com.w_s_backend.w_s.ClothCardServiceTest" time="0.0"/>
+  <testcase name="getUserCards_ShouldReturnEmptyList_WhenNoCards" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.002"/>
+  <testcase name="deleteOutfit_ShouldReturnOk_WhenAuthorized" classname="com.w_s_backend.w_s.CardClothsControllerTest" time="0.001"/>
 </testsuite>

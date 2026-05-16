@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.w_s_backend.w_s.JwtServiceTest
+-------------------------------------------------------------------------------
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.275 s -- in com.w_s_backend.w_s.JwtServiceTest

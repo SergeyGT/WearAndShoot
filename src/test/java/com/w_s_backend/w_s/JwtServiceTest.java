@@ -153,6 +153,10 @@ class JwtServiceTest {
         Long userId = jwtService.extractUserId(token);
         assertEquals(77L, userId);
     }
+
+    @Test
+    void generateAndValidate_ShouldWorkEndToEn() {
+    }
     
     @Test
     void tokenSignedWithDifferentSecret_ShouldBeInvalid() {
