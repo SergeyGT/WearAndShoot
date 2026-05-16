@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: com.w_s_backend.w_s.ClothCardServiceTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.870 s <<< FAILURE! -- in com.w_s_backend.w_s.ClothCardServiceTest
+com.w_s_backend.w_s.ClothCardServiceTest.winterOutfits_ShouldHaveMoreThanTwoItems -- Time elapsed: 0.012 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: ❌ Образ 'Зимний тест #1' не содержит свитера или куртки! ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.w_s_backend.w_s.ClothCardServiceTest.winterOutfits_ShouldHaveMoreThanTwoItems(ClothCardServiceTest.java:144)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.w_s_backend.w_s.ClothCardServiceTest.winterOutfits_ShouldNotBeOnlyTopAndBottom -- Time elapsed: 0.008 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: ❌ Образ 'Повседневный образ #4' содержит только верх и низ! При -10°C нужны слои. ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:239)
+	at com.w_s_backend.w_s.ClothCardServiceTest.winterOutfits_ShouldNotBeOnlyTopAndBottom(ClothCardServiceTest.java:207)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
